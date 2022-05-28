@@ -57,6 +57,15 @@ namespace images {
         m_pathToSave = path;
     }
 
+    void Fractal::setImageSize(int size){
+        m_imageHeight = m_imageWidth = size;
+    }
+
+    void Fractal::setFractalHeight(int i_x, int i_y){
+        m_fractalHeight = m_imageHeight / i_x;
+        m_fractalWidth = m_imageWidth / i_y;
+    }
+
     void Fractal::generate() {
         double probability;
         int iterationCount = m_imageHeight * m_imageWidth *

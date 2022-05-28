@@ -28,6 +28,10 @@ namespace images {
 
         void setPathToSave(std::string &path);
 
+        void setImageSize(int size);
+
+        void setFractalHeight(int i_x, int i_y);
+
         void generate();
 
         void save();
