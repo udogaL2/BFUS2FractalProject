@@ -1,5 +1,6 @@
 #include "inc/fractal.h"
-
+#include <QApplication>
+#include "inc/MainMenu.h"
 /*
 // ЁлОчка
 math::Mat22d f1({{{-0.1, 0},
