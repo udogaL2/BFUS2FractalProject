@@ -1,3 +1,5 @@
+#pragma once
+
 #include "BMP.h"
 #include <string>
 #include <random>
@@ -23,6 +25,8 @@ namespace images {
         void setBackgroundColor(images::Pixel &pixel);
 
         void setMainColor(images::Pixel &pixel);
+
+        void setFractalColor();
 
         void setRandomColor();
 

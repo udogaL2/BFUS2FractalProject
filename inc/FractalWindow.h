@@ -13,7 +13,7 @@
 #include <QMessageBox>
 #include <QErrorMessage>
 
-#include <memory>
+#include "fractal.h"
 
 namespace fg {
     class FractalGenerator : public QWidget {
@@ -365,9 +365,29 @@ namespace fg {
                 return;
             }
 
-            //
-            // генерация фрактала
-            //
+            images::Pixel bg_px{static_cast<uint8_t>(m_BGColor.blue()), static_cast<uint8_t>(m_BGColor.green()),
+                                static_cast<uint8_t>(m_BGColor.red())};
+            images::Pixel main_px{static_cast<uint8_t>(m_mainColor.blue()), static_cast<uint8_t>(m_mainColor.green()),
+                                  static_cast<uint8_t>(m_mainColor.red())};
+
+            images::Fractal fr;
+            fr.setImageSize(size);
+            fr.setFractalHeight(d_x, d_y);
+
+            std::string path = m_PathToSave.toStdString();
+            fr.setPathToSave(path);
+
+            if (radioButton->isChecked()) {
+                fr.setBackgroundColor(bg_px);
+                fr.setMainColor(main_px);
+            } else if (radioButton_2->isChecked()) {
+                fr.setFractalColor();
+            } else if (radioButton_3->isChecked()) {
+                fr.setRandomColor();
+            }
+
+            fr.generate();
+            fr.save();
 
             QMessageBox msgBox;
             msgBox.setWindowTitle(QString::fromUtf8("Успех"));
@@ -392,7 +412,7 @@ namespace fg {
 
             m_imageWindow->setText("");
             auto fractalPixmap = QPixmap::fromImage(fractalImage);
-            fractalPixmap.scaled(450, 450);
+            fractalPixmap = fractalPixmap.scaled(450, 450, Qt::IgnoreAspectRatio, Qt::FastTransformation);
             m_imageWindow->setPixmap(fractalPixmap);
         }
     };

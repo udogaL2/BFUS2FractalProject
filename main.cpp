@@ -1,6 +1,6 @@
-#include "inc/fractal.h"
 #include <QApplication>
 #include "inc/MainMenu.h"
+
 /*
 // ЁлОчка
 math::Mat22d f1({{{-0.1, 0},
@@ -16,11 +16,11 @@ math::Vec2d fp1({{{0}, {1.6}}});
 math::Vec2d fp2({{{0}, {1.6}}});
 */
 
+int main(int argc, char **argv) {
+    QApplication app(argc, argv);
 
-int main() {
-    images::Fractal fr;
-    fr.setRandomColor();
-    fr.generate();
-    fr.save();
-    return 0;
+    fg::MainMenu prog;
+    prog.show();
+
+    return app.exec();
 }

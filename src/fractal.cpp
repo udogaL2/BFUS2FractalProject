@@ -18,8 +18,6 @@ namespace images {
         m_fractalHeight = m_imageHeight / 10;
         m_fractalWidth = m_imageWidth / 12;
 
-        m_bmp = std::make_unique<images::BMP>(m_imageWidth, m_imageHeight);
-
         m_pathToSave = "../fractal.bmp";
     }
 
@@ -40,12 +38,19 @@ namespace images {
 
     void Fractal::setBackgroundColor(images::Pixel &pixel) {
         m_backgroundColor = pixel;
+        m_isFractalColor = false;
+        m_isRandomColor = false;
     }
 
     void Fractal::setMainColor(images::Pixel &pixel) {
         m_mainColor = pixel;
         m_isFractalColor = false;
         m_isRandomColor = false;
+    }
+
+    void Fractal::setFractalColor() {
+        m_isRandomColor = false;
+        m_isFractalColor = true;
     }
 
     void Fractal::setRandomColor() {
@@ -58,12 +63,13 @@ namespace images {
     }
 
     void Fractal::setImageSize(int size){
-        m_imageHeight = m_imageWidth = size;
+        m_imageHeight = size;
+        m_imageWidth = size;
     }
 
     void Fractal::setFractalHeight(int i_x, int i_y){
-        m_fractalHeight = m_imageHeight / i_x;
-        m_fractalWidth = m_imageWidth / i_y;
+        m_fractalHeight = m_imageHeight / i_y;
+        m_fractalWidth = m_imageWidth / i_x;
     }
 
     void Fractal::generate() {
@@ -72,6 +78,7 @@ namespace images {
                              (10 * float(m_isFractalColor or m_isRandomColor) +
                               0.5 * float(!(m_isFractalColor or m_isRandomColor)));
 
+        m_bmp = std::make_unique<images::BMP>(m_imageWidth, m_imageHeight);
         m_bmp->Fill(m_backgroundColor);
 
         std::random_device rd;
