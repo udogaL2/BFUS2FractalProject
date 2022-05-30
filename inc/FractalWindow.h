@@ -18,8 +18,7 @@
 namespace fg {
     class FractalGenerator : public QWidget {
     Q_OBJECT
-    private:
-        QLabel *m_imageWindow;
+    protected:
         QLabel *m_fractalTitleLabel;
 
         QSlider *m_hSlider_dx;
@@ -38,7 +37,6 @@ namespace fg {
         QPushButton *m_btnBGColor;
         QPushButton *m_btnMainColor;
         QPushButton *m_btnGenerate;
-        QPushButton *m_btnShowImage;
         QPushButton *m_btnClose;
 
         QRadioButton *radioButton;
@@ -50,10 +48,6 @@ namespace fg {
         QFrame *line_3;
         QFrame *line_4;
         QFrame *line_5;
-        QFrame *line_6;
-        QFrame *line_7;
-        QFrame *line_8;
-        QFrame *line_9;
 
         QSpinBox *m_spinBox_dx;
         QSpinBox *m_spinBox_dy;
@@ -81,9 +75,6 @@ namespace fg {
             // *QFont
 
             // QLabel
-            m_imageWindow = new QLabel(this);
-            m_imageWindow->setGeometry(QRect(330, 70, 450, 450));
-
             m_fractalTitleLabel = new QLabel(this);
             m_fractalTitleLabel->setGeometry(QRect(20, 10, 271, 31));
             m_fractalTitleLabel->setFont(font1);
@@ -171,10 +162,6 @@ namespace fg {
             m_btnGenerate->setGeometry(QRect(90, 490, 141, 31));
             m_btnGenerate->setFont(font);
 
-            m_btnShowImage = new QPushButton(this);
-            m_btnShowImage->setGeometry(QRect(90, 530, 141, 31));
-            m_btnShowImage->setFont(font);
-
             m_btnClose = new QPushButton(this);
             m_btnClose->setGeometry(QRect(710, 10, 75, 24));
             m_btnClose->setFont(font3);
@@ -220,27 +207,6 @@ namespace fg {
             line_5->setGeometry(QRect(0, 40, 318, 16));
             line_5->setFrameShape(QFrame::HLine);
             line_5->setFrameShadow(QFrame::Sunken);
-
-
-            line_6 = new QFrame(this);
-            line_6->setGeometry(QRect(330, 70, 450, 3));
-            line_6->setFrameShape(QFrame::HLine);
-            line_6->setFrameShadow(QFrame::Sunken);
-
-            line_7 = new QFrame(this);
-            line_7->setGeometry(QRect(330, 70, 3, 450));
-            line_7->setFrameShape(QFrame::VLine);
-            line_7->setFrameShadow(QFrame::Sunken);
-
-            line_8 = new QFrame(this);
-            line_8->setGeometry(QRect(330, 520, 450, 3));
-            line_8->setFrameShape(QFrame::HLine);
-            line_8->setFrameShadow(QFrame::Sunken);
-
-            line_9 = new QFrame(this);
-            line_9->setGeometry(QRect(780, 70, 3, 450));
-            line_9->setFrameShape(QFrame::VLine);
-            line_9->setFrameShadow(QFrame::Sunken);
             // *QFrame
 
             // QSpinBox
@@ -281,14 +247,12 @@ namespace fg {
             // Подключение кнопок
             connect(m_btnBGColor, SIGNAL(clicked()), SLOT(slotBtnBGColorDialog()));
             connect(m_btnMainColor, SIGNAL(clicked()), SLOT(slotBtnMainColorDialog()));
-            connect(m_btnGenerate, SIGNAL(clicked()), SLOT(slotBtnGenerate()));
-            connect(m_btnShowImage, SIGNAL(clicked()), SLOT(slotBtnShowImage()));
             connect(m_btnClose, SIGNAL(clicked()), SLOT(close()));
         }
 
-        ~FractalGenerator() override = default;
+        virtual ~FractalGenerator() = default;
 
-    private:
+    protected:
         void setText(const QString &name) {
             this->setWindowTitle(QString::fromUtf8("Fractal Generator"));
             m_fractalTitleLabel->setText(name);
@@ -301,7 +265,6 @@ namespace fg {
             radioButton_2->setText(QString::fromUtf8("фрактальный"));
             radioButton_3->setText(QString::fromUtf8("случайный"));
             m_btnGenerate->setText(QString::fromUtf8("сгенерировать"));
-            m_btnShowImage->setText(QString::fromUtf8("отобразить"));
             m_btnClose->setText(QString::fromUtf8("закрыть"));
         }
 
@@ -322,11 +285,11 @@ namespace fg {
             QErrorMessage errorMessage;
             errorMessage.setWindowTitle(QString::fromUtf8("Ошибка"));
             errorMessage.showMessage(
-                    QString::fromUtf8("Произошла ошибка, путь файла не указан. Повторите попытку."));
+                    QString::fromUtf8("Произошла ошибка, путь файла не указан. Повторите попытку.\nДля того, чтобы указать путь, необходимо нажать \"сгенерировать\"."));
             errorMessage.exec();
         }
 
-    private slots:
+    protected slots:
 
         void slotBtnBGColorDialog() {
             // Диалоговое окно для получения цвета фона
@@ -352,69 +315,9 @@ namespace fg {
             }
         };
 
-        void slotBtnGenerate() {
-            int d_x = m_hSlider_dx->value();
-            int d_y = m_hSlider_dy->value();
+        virtual void slotBtnGenerate() = 0;
 
-            int size = stoi(m_comboBox->currentText().toStdString());
-
-            saveAsMsg();
-
-            if (m_PathToSave.isEmpty()) {
-                errorSaveMsg();
-                return;
-            }
-
-            images::Pixel bg_px{static_cast<uint8_t>(m_BGColor.blue()), static_cast<uint8_t>(m_BGColor.green()),
-                                static_cast<uint8_t>(m_BGColor.red())};
-            images::Pixel main_px{static_cast<uint8_t>(m_mainColor.blue()), static_cast<uint8_t>(m_mainColor.green()),
-                                  static_cast<uint8_t>(m_mainColor.red())};
-
-            images::Fractal fr;
-            fr.setImageSize(size);
-            fr.setFractalHeight(d_x, d_y);
-
-            std::string path = m_PathToSave.toStdString();
-            fr.setPathToSave(path);
-
-            if (radioButton->isChecked()) {
-                fr.setBackgroundColor(bg_px);
-                fr.setMainColor(main_px);
-            } else if (radioButton_2->isChecked()) {
-                fr.setFractalColor();
-            } else if (radioButton_3->isChecked()) {
-                fr.setRandomColor();
-            }
-
-            fr.generate();
-            fr.save();
-
-            QMessageBox msgBox;
-            msgBox.setWindowTitle(QString::fromUtf8("Успех"));
-            msgBox.setText(
-                    QString::fromUtf8("Фрактал был успешно сгенерирован!\nДля отображения нажмите 'Отобразить'."));
-            msgBox.exec();
-        }
-
-        void slotBtnShowImage() {
-            if (m_PathToSave.isEmpty()) {
-                errorSaveMsg();
-                return;
-            }
-
-            QImage fractalImage;
-            fractalImage.load(m_PathToSave);
-
-            if (fractalImage.isNull()) {
-                m_imageWindow->setText("Error while loading!");
-                return;
-            }
-
-            m_imageWindow->setText("");
-            auto fractalPixmap = QPixmap::fromImage(fractalImage);
-            fractalPixmap = fractalPixmap.scaled(450, 450, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-            m_imageWindow->setPixmap(fractalPixmap);
-        }
+        virtual void slotBtnShowImage() = 0;
     };
 
 }

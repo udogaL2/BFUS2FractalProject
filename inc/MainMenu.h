@@ -1,6 +1,7 @@
 #pragma once
 
-#include "FractalWindow.h"
+#include "SheetFractal.h"
+#include "FirFractal.h"
 
 namespace fg {
     class MainMenu : public QWidget {
@@ -11,7 +12,8 @@ namespace fg {
         QPushButton *m_btnMyFractal;
         QPushButton *m_btnClose;
         QLabel *m_Title;
-        FractalGenerator *fractalGenerator{};
+        std::unique_ptr<SheetFractal> m_sheetFractal;
+        std::unique_ptr<FirFractal> m_firFractal;
 
     public:
         explicit MainMenu(QWidget *pwgt = nullptr) : QWidget(pwgt) {
@@ -37,13 +39,12 @@ namespace fg {
 
             setText();
 
-            connect(m_btnSheetFractal, SIGNAL(clicked()), SLOT(slotBtnOpenFirFractal()));
+            connect(m_btnSheetFractal, SIGNAL(clicked()), SLOT(slotBtnOpenSheetFractal()));
+            connect(m_btnFirFractal, SIGNAL(clicked()), SLOT(slotBtnOpenFirFractal()));
             connect(m_btnClose, SIGNAL(clicked()), SLOT(close()));
         }
 
-        ~MainMenu() override {
-            delete fractalGenerator;
-        };
+        ~MainMenu() = default;
 
     private:
         void setText() {
@@ -57,9 +58,14 @@ namespace fg {
 
     private slots :
 
-        void slotBtnOpenFirFractal() {
-            fractalGenerator = new FractalGenerator("Лист папоротника");
-            fractalGenerator->show();
+        void slotBtnOpenSheetFractal() {
+            m_sheetFractal = std::make_unique<SheetFractal>("Лист папоротника");
+            m_sheetFractal->show();
         };
+
+        void slotBtnOpenFirFractal(){
+            m_firFractal = std::make_unique<FirFractal>("Ёлочка");
+            m_firFractal->show();
+        }
     };
 }
