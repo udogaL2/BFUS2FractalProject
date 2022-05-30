@@ -12,11 +12,19 @@ namespace images {
 
         m_firstAdditionalLaw = math::Vec2d({{{0}, {1.6}}});
         m_secondAdditionalLaw = math::Vec2d({{{0}, {0.44}}});
+        m_thirdAdditionalLaw = math::Vec2d({{{0}, {1.6}}});
+        m_fourthAdditionalLaw = math::Vec2d({{{0}, {0}}});
 
         m_imageHeight = m_imageWidth = 1000;
 
         m_fractalHeight = m_imageHeight / 10;
         m_fractalWidth = m_imageWidth / 12;
+
+        md_x = 50;
+
+        m_probability1 = 0.85;
+        m_probability2 = 0.92;
+        m_probability3 = 0.99;
 
         m_pathToSave = "../fractal.bmp";
     }
@@ -31,9 +39,18 @@ namespace images {
         m_fourthMainLaw = f4;
     }
 
-    void Fractal::setAdditionalLaws(const math::Vec2d &fa1, const math::Vec2d &fa2) {
+    void Fractal::setAdditionalLaws(const math::Vec2d &fa1, const math::Vec2d &fa2, const math::Vec2d &fa3,
+                                    const math::Vec2d &fa4) {
         m_firstAdditionalLaw = fa1;
         m_secondAdditionalLaw = fa2;
+        m_thirdAdditionalLaw = fa3;
+        m_fourthAdditionalLaw = fa4;
+    }
+
+    void Fractal::setProbability(double p1, double p2, double p3){
+        m_probability1 = p1;
+        m_probability2 = p2;
+        m_probability3 = p3;
     }
 
     void Fractal::setBackgroundColor(images::Pixel &pixel) {
@@ -62,14 +79,18 @@ namespace images {
         m_pathToSave = path;
     }
 
-    void Fractal::setImageSize(int size){
+    void Fractal::setImageSize(int size) {
         m_imageHeight = size;
         m_imageWidth = size;
     }
 
-    void Fractal::setFractalHeight(int i_x, int i_y){
+    void Fractal::setFractalHeight(int i_x, int i_y) {
         m_fractalHeight = m_imageHeight / i_y;
         m_fractalWidth = m_imageWidth / i_x;
+    }
+
+    void Fractal::setD_x(int d_x){
+        md_x = d_x;
     }
 
     void Fractal::generate() {
@@ -100,16 +121,16 @@ namespace images {
             temp_nums = {1, 2, 6};
         while (iterationCount > 0) {
             probability = dist_probability(double_gen); // генерируем случайное число от 0 до 1 (вероятность)
-            if (probability <= 0.85) {
+            if (probability <= m_probability1) {
                 current_cords = m_secondMainLaw * current_cords + m_firstAdditionalLaw;
-            } else if (probability <= 0.92) {
-                current_cords = m_thirdMainLaw * current_cords + m_firstAdditionalLaw;
-            } else if (probability <= 0.99) {
+            } else if (probability <= m_probability2) {
+                current_cords = m_thirdMainLaw * current_cords + m_thirdAdditionalLaw;
+            } else if (probability <= m_probability3) {
                 current_cords = m_fourthMainLaw * current_cords + m_secondAdditionalLaw;
             } else {
-                current_cords = m_firstMainLaw * current_cords;
+                current_cords = m_firstMainLaw * current_cords + m_fourthAdditionalLaw;
             }
-            int x = (int) (current_cords.get(0, 1) * m_fractalWidth + 50);
+            int x = (int) (current_cords.get(0, 1) * m_fractalWidth + md_x);
             int y = (int) (current_cords.get(0, 0) * m_fractalHeight + m_imageHeight / 2);
 
             if (0 <= x and x < m_imageHeight and 0 <= y and y < m_imageWidth) {

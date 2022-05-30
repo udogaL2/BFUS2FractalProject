@@ -84,11 +84,13 @@ namespace fg {
 
             math::Vec2d fp1({{{0}, {1.6}}});
             math::Vec2d fp2({{{0}, {1.6}}});
+            math::Vec2d fp3({{{0}, {1.6}}});
+            math::Vec2d fp4({{{0}, {0}}});
 
             images::Fractal fr;
 
             fr.setMainLaws(f1, f2, f3, f4);
-            fr.setAdditionalLaws(fp1, fp2);
+            fr.setAdditionalLaws(fp1, fp2, fp3, fp4);
 
             fr.setImageSize(size);
             fr.setFractalHeight(d_x, d_y);
@@ -119,7 +121,7 @@ namespace fg {
             msgBox.exec();
         }
 
-        void slotBtnShowImage() override{
+        void slotBtnShowImage() {
             if (m_PathToSave.isEmpty()) {
                 errorSaveMsg();
                 return;

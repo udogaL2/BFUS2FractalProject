@@ -3,11 +3,11 @@
 #include "FractalWindow.h"
 
 namespace fg {
-    class SheetFractal : public FractalGenerator {
+    class MapleFractal : public FractalGenerator {
     Q_OBJECT
     public:
 
-        explicit SheetFractal(const QString &fractalName, QWidget *pwgt = nullptr) : FractalGenerator(fractalName) {
+        explicit MapleFractal(const QString &fractalName, QWidget *pwgt = nullptr) : FractalGenerator(fractalName) {
             QFont font;
             font.setPointSize(12);
 
@@ -43,7 +43,7 @@ namespace fg {
             connect(m_btnShowImage, SIGNAL(clicked()), SLOT(slotBtnShowImage()));
         }
 
-        ~SheetFractal() override = default;
+        ~MapleFractal() override = default;
 
     private:
         QLabel *m_imageWindow;
@@ -69,7 +69,28 @@ namespace fg {
                 return;
             }
 
+            math::Mat22d f1({{{0.14, 0.01},
+                              {0, 0.51}}});
+            math::Mat22d f2({{{0.43, 0.52},
+                              {-0.45, 0.5}}});
+            math::Mat22d f3({{{0.45, -0.49},
+                              {0.47, 0.47}}});
+            math::Mat22d f4({{{0.49, 0.0},
+                              {0.0, 0.51}}});
+
+            math::Vec2d fp1({{{1.49}, {-0.75}}});
+            math::Vec2d fp2({{{0.02}, {1.62}}});
+            math::Vec2d fp3({{{-1.62}, {-0.74}}});
+            math::Vec2d fp4({{{-0.08}, {-1.31}}});
+
             images::Fractal fr;
+
+            fr.setProbability(0.37, 0.73, 0.94);
+            fr.setD_x(size / 2);
+
+            fr.setMainLaws(f1, f2, f3, f4);
+            fr.setAdditionalLaws(fp1, fp2, fp3, fp4);
+
             fr.setImageSize(size);
             fr.setFractalHeight(d_x, d_y);
 
@@ -99,7 +120,7 @@ namespace fg {
             msgBox.exec();
         }
 
-         void slotBtnShowImage(){
+        void slotBtnShowImage(){
             if (m_PathToSave.isEmpty()) {
                 errorSaveMsg();
                 return;

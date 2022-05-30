@@ -316,8 +316,6 @@ namespace fg {
         };
 
         virtual void slotBtnGenerate() = 0;
-
-        virtual void slotBtnShowImage() = 0;
     };
 
 }

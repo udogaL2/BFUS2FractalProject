@@ -20,7 +20,10 @@ namespace images {
         void
         setMainLaws(const math::Mat22d &f1, const math::Mat22d &f2, const math::Mat22d &f3, const math::Mat22d &f4);
 
-        void setAdditionalLaws(const math::Vec2d &fa1, const math::Vec2d &fa2);
+        void setAdditionalLaws(const math::Vec2d &fa1, const math::Vec2d &fa2, const math::Vec2d &fa3,
+                               const math::Vec2d &fa4);
+
+        void setProbability(double p1, double p2, double p3);
 
         void setBackgroundColor(images::Pixel &pixel);
 
@@ -35,6 +38,8 @@ namespace images {
         void setImageSize(int size);
 
         void setFractalHeight(int i_x, int i_y);
+
+        void setD_x(int d_x);
 
         void generate();
 
@@ -56,9 +61,14 @@ namespace images {
 
         math::Vec2d m_firstAdditionalLaw;
         math::Vec2d m_secondAdditionalLaw;
+        math::Vec2d m_thirdAdditionalLaw;
+        math::Vec2d m_fourthAdditionalLaw;
 
         int m_imageHeight{}, m_imageWidth{};
         int m_fractalHeight{}, m_fractalWidth{};
+        int md_x{};
+
+        double m_probability1{}, m_probability2{}, m_probability3{};
 
         std::unique_ptr<images::BMP> m_bmp;
 
