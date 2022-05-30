@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(fractal_project main.cpp inc/MainMenu.h inc/ExperimentFractal.h inc/MapleFractal.h
+add_executable(fractal_project main.cpp inc/MainMenu.h inc/ExperimentFractal.h inc/MapleFractal.h inc/SpiralFractal.h
         inc/FirFractal.h inc/SheetFractal.h inc/FractalWindow.h
         src/BMP.cpp inc/BMP.h inc/mathutils/matrix.hpp src/fractal.cpp inc/fractal.h)
 

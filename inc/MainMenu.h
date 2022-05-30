@@ -4,6 +4,7 @@
 #include "FirFractal.h"
 #include "ExperimentFractal.h"
 #include "MapleFractal.h"
+#include "SpiralFractal.h"
 
 namespace fg {
     class MainMenu : public QWidget {
@@ -20,6 +21,7 @@ namespace fg {
         std::unique_ptr<FirFractal> m_firFractal;
         std::unique_ptr<MyFractal> m_myFractal;
         std::unique_ptr<MapleFractal> m_mapleFractal;
+        std::unique_ptr<SpiralFractal> m_spiralFractal;
 
     public:
         explicit MainMenu(QWidget *pwgt = nullptr) : QWidget(pwgt) {
@@ -53,6 +55,7 @@ namespace fg {
             connect(m_btnFirFractal, SIGNAL(clicked()), SLOT(slotBtnOpenFirFractal()));
             connect(m_btnMyFractal, SIGNAL(clicked()), SLOT(slotBtnOpenMyFractal()));
             connect(m_btnMapleFractal, SIGNAL(clicked()), SLOT(slotBtnOpenMapleFractal()));
+            connect(m_btnSpiralFractal, SIGNAL(clicked()), SLOT(slotBtnOpenSpiralFractal()));
             connect(m_btnClose, SIGNAL(clicked()), SLOT(close()));
         }
 
@@ -90,6 +93,11 @@ namespace fg {
         void slotBtnOpenMapleFractal(){
             m_mapleFractal = std::make_unique<MapleFractal>("Клиновый лист");
             m_mapleFractal->show();
+        }
+
+        void slotBtnOpenSpiralFractal(){
+            m_spiralFractal = std::make_unique<SpiralFractal>("Спираль");
+            m_spiralFractal->show();
         }
     };
 }
