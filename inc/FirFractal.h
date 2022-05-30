@@ -98,12 +98,13 @@ namespace fg {
             std::string path = m_PathToSave.toStdString();
             fr.setPathToSave(path);
 
+            images::Pixel bg_px{static_cast<uint8_t>(m_BGColor.blue()), static_cast<uint8_t>(m_BGColor.green()),
+                                static_cast<uint8_t>(m_BGColor.red())};
+            fr.setBackgroundColor(bg_px);
+
             if (radioButton->isChecked()) {
-                images::Pixel bg_px{static_cast<uint8_t>(m_BGColor.blue()), static_cast<uint8_t>(m_BGColor.green()),
-                                    static_cast<uint8_t>(m_BGColor.red())};
                 images::Pixel main_px{static_cast<uint8_t>(m_mainColor.blue()), static_cast<uint8_t>(m_mainColor.green()),
                                       static_cast<uint8_t>(m_mainColor.red())};
-                fr.setBackgroundColor(bg_px);
                 fr.setMainColor(main_px);
             } else if (radioButton_2->isChecked()) {
                 fr.setFractalColor();

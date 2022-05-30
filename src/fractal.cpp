@@ -55,8 +55,6 @@ namespace images {
 
     void Fractal::setBackgroundColor(images::Pixel &pixel) {
         m_backgroundColor = pixel;
-        m_isFractalColor = false;
-        m_isRandomColor = false;
     }
 
     void Fractal::setMainColor(images::Pixel &pixel) {
