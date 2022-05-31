@@ -93,6 +93,7 @@ namespace images {
 
     void Fractal::generate() {
         double probability;
+        // вычисление количества итераций в зависимости от настройки цвета и размера изображения
         int iterationCount = m_imageHeight * m_imageWidth *
                              (10 * float(m_isFractalColor or m_isRandomColor) +
                               0.5 * float(!(m_isFractalColor or m_isRandomColor)));
@@ -100,11 +101,13 @@ namespace images {
         m_bmp = std::make_unique<images::BMP>(m_imageWidth, m_imageHeight);
         m_bmp->Fill(m_backgroundColor);
 
+        // генератор чисел int от 1 до 8 для генерации цвета
         std::random_device rd;
         std::mt19937 int_gen(rd());
         std::uniform_int_distribution<> dist(1, 8);
         int_gen.seed(unsigned(std::time(nullptr)));
 
+        // генератор чисел double для генерации вероятности
         std::mt19937 double_gen(rd());
         std::uniform_real_distribution<double> dist_probability(0, 1.0);
         double_gen.seed(unsigned(std::time(nullptr)));
@@ -112,11 +115,12 @@ namespace images {
         math::Vec2d current_cords({{{1.0}, {0.0}}});
 
         images::Pixel cur_pix = m_mainColor;
-        std::vector<int> temp_nums;
+
+        std::vector<int> color_settings;
         if (m_isRandomColor)
-            temp_nums = {dist(int_gen), dist(int_gen), dist(int_gen)};
+            color_settings = {dist(int_gen), dist(int_gen), dist(int_gen)};
         if (m_isFractalColor)
-            temp_nums = {1, 2, 6};
+            color_settings = {1, 2, 6};
         while (iterationCount > 0) {
             probability = dist_probability(double_gen); // генерируем случайное число от 0 до 1 (вероятность)
             if (probability <= m_probability1) {
@@ -128,12 +132,15 @@ namespace images {
             } else {
                 current_cords = m_firstMainLaw * current_cords + m_firstAdditionalLaw;
             }
+
+            // перевод координат под размеры изображения
             int x = (int) (current_cords.get(0, 1) * m_fractalWidth + md_x);
             int y = (int) (current_cords.get(0, 0) * m_fractalHeight + m_imageHeight / 2);
 
+            // выбор цвета и установка пикселя
             if (0 <= x and x < m_imageHeight and 0 <= y and y < m_imageWidth) {
                 if (m_isFractalColor or m_isRandomColor) {
-                    cur_pix = getFractalPixel(x, y, temp_nums);
+                    cur_pix = getFractalPixel(x, y, color_settings);
                 }
                 m_bmp->Set(cur_pix, x, y);
             }
@@ -150,6 +157,7 @@ namespace images {
     }
 
     images::Pixel Fractal::getFractalPixel(int x, int y, std::vector<int> &nums) {
+        // генерация цветов пикселя по заданным настройкам
         uint8_t temp_mas[3];
         for (int i = 0; i < 3; i++) {
             int condition = nums[i];

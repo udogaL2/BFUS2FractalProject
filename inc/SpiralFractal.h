@@ -56,7 +56,9 @@ namespace fg {
         QFrame *line_9;
 
     private slots:
-                void slotBtnGenerate() override{
+        void slotBtnGenerate() override{
+            // Подробные комментарии для этой функции указаны в MapleFractal.h
+
             int d_x = m_hSlider_dx->value();
             int d_y = m_hSlider_dy->value();
 
@@ -81,7 +83,8 @@ namespace fg {
 
             images::Fractal fr;
 
-            fr.setProbability(0.5, 0, 0);
+            // т.к. в генерации данного фрактала участвует всего два закона, то две из трех вероятностей отрицательны
+            fr.setProbability(0.5, -1, -1);
             fr.setD_x(size / 2);
 
             fr.setMainLaws(f1, f2, f3, f3);

@@ -61,6 +61,7 @@ namespace fg {
 
     private slots:
         void slotBtnGenerate() override{
+            // Подробные комментарии для этой функции указаны в MapleFractal.h
             int d_x = m_hSlider_dx->value();
             int d_y = m_hSlider_dy->value();
 

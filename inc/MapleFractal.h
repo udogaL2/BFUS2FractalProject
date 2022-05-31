@@ -57,11 +57,14 @@ namespace fg {
 
     private slots:
         void slotBtnGenerate() override{
+            // коэффициенты для преобразования координат для изображения
             int d_x = m_hSlider_dx->value();
             int d_y = m_hSlider_dy->value();
 
+            // размер изображения
             int size = stoi(m_comboBox->currentText().toStdString());
 
+            // путь для сохранения
             saveAsMsg();
 
             if (m_PathToSave.isEmpty()) {
@@ -69,6 +72,7 @@ namespace fg {
                 return;
             }
 
+            // создание матриц с законами для фрактала
             math::Mat22d f1({{{0.14, 0.01},
                               {0, 0.51}}});
             math::Mat22d f2({{{0.43, 0.52},
@@ -83,24 +87,32 @@ namespace fg {
             math::Vec2d fp3({{{-1.62}, {-0.74}}});
             math::Vec2d fp4({{{0.02}, {1.62}}});
 
+            // создание фрактала и его заполнение
             images::Fractal fr;
 
+            // установка вероятностей
             fr.setProbability(0.37, 0.73, 0.94);
+            // коэффициент смещения
             fr.setD_x(size / 2);
 
+            // установка законов
             fr.setMainLaws(f1, f2, f3, f4);
             fr.setAdditionalLaws(fp1, fp2, fp3, fp4);
 
+            // установка размеров
             fr.setImageSize(size);
             fr.setFractalHeight(d_x, d_y);
 
+            // установка пути
             std::string path = m_PathToSave.toStdString();
             fr.setPathToSave(path);
 
+            // установка пикселя фона
             images::Pixel bg_px{static_cast<uint8_t>(m_BGColor.blue()), static_cast<uint8_t>(m_BGColor.green()),
                                 static_cast<uint8_t>(m_BGColor.red())};
             fr.setBackgroundColor(bg_px);
 
+            // в зависимости от настройки устанавливается нужный режим цвета
             if (radioButton->isChecked()) {
                 images::Pixel main_px{static_cast<uint8_t>(m_mainColor.blue()), static_cast<uint8_t>(m_mainColor.green()),
                                       static_cast<uint8_t>(m_mainColor.red())};
@@ -111,6 +123,7 @@ namespace fg {
                 fr.setRandomColor();
             }
 
+            // генерация и сохранение
             fr.generate();
             fr.save();
 
@@ -122,6 +135,7 @@ namespace fg {
         }
 
         void slotBtnShowImage(){
+            // отображение изображения на экране
             if (m_PathToSave.isEmpty()) {
                 errorSaveMsg();
                 return;
