@@ -78,10 +78,10 @@ namespace fg {
             math::Mat22d f4({{{0.49, 0.0},
                               {0.0, 0.51}}});
 
-            math::Vec2d fp1({{{1.49}, {-0.75}}});
-            math::Vec2d fp2({{{0.02}, {1.62}}});
+            math::Vec2d fp1({{{-0.08}, {-1.31}}});
+            math::Vec2d fp2({{{1.49}, {-0.75}}});
             math::Vec2d fp3({{{-1.62}, {-0.74}}});
-            math::Vec2d fp4({{{-0.08}, {-1.31}}});
+            math::Vec2d fp4({{{0.02}, {1.62}}});
 
             images::Fractal fr;
 

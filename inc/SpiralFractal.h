@@ -85,7 +85,7 @@ namespace fg {
             fr.setD_x(size / 2);
 
             fr.setMainLaws(f1, f2, f3, f3);
-            fr.setAdditionalLaws(fp2, fp1, fp1, fp1);
+            fr.setAdditionalLaws(fp1, fp2, fp1, fp1);
 
             fr.setImageSize(size);
             fr.setFractalHeight(d_x, d_y);

@@ -10,10 +10,10 @@ namespace images {
         m_thirdMainLaw = math::Mat22d({{{0.2, -0.26}, {0.23, 0.2}}});
         m_fourthMainLaw = math::Mat22d({{{-0.15, 0.28}, {0.26, 0.24}}});
 
-        m_firstAdditionalLaw = math::Vec2d({{{0}, {1.6}}});
-        m_secondAdditionalLaw = math::Vec2d({{{0}, {0.44}}});
+        m_firstAdditionalLaw = math::Vec2d({{{0}, {0}}});
+        m_secondAdditionalLaw = math::Vec2d({{{0}, {1.6}}});
         m_thirdAdditionalLaw = math::Vec2d({{{0}, {1.6}}});
-        m_fourthAdditionalLaw = math::Vec2d({{{0}, {0}}});
+        m_fourthAdditionalLaw = math::Vec2d({{{0}, {0.44}}});
 
         m_imageHeight = m_imageWidth = 1000;
 
@@ -47,7 +47,7 @@ namespace images {
         m_fourthAdditionalLaw = fa4;
     }
 
-    void Fractal::setProbability(double p1, double p2, double p3){
+    void Fractal::setProbability(double p1, double p2, double p3) {
         m_probability1 = p1;
         m_probability2 = p2;
         m_probability3 = p3;
@@ -87,7 +87,7 @@ namespace images {
         m_fractalWidth = m_imageWidth / i_x;
     }
 
-    void Fractal::setD_x(int d_x){
+    void Fractal::setD_x(int d_x) {
         md_x = d_x;
     }
 
@@ -120,13 +120,13 @@ namespace images {
         while (iterationCount > 0) {
             probability = dist_probability(double_gen); // генерируем случайное число от 0 до 1 (вероятность)
             if (probability <= m_probability1) {
-                current_cords = m_secondMainLaw * current_cords + m_firstAdditionalLaw;
+                current_cords = m_secondMainLaw * current_cords + m_secondAdditionalLaw;
             } else if (probability <= m_probability2) {
                 current_cords = m_thirdMainLaw * current_cords + m_thirdAdditionalLaw;
             } else if (probability <= m_probability3) {
-                current_cords = m_fourthMainLaw * current_cords + m_secondAdditionalLaw;
+                current_cords = m_fourthMainLaw * current_cords + m_fourthAdditionalLaw;
             } else {
-                current_cords = m_firstMainLaw * current_cords + m_fourthAdditionalLaw;
+                current_cords = m_firstMainLaw * current_cords + m_firstAdditionalLaw;
             }
             int x = (int) (current_cords.get(0, 1) * m_fractalWidth + md_x);
             int y = (int) (current_cords.get(0, 0) * m_fractalHeight + m_imageHeight / 2);
@@ -173,9 +173,13 @@ namespace images {
                     temp_mas[i] = static_cast<uint8_t>(255 - (y * x) % 255);
                     break;
                 case 7:
+                    if (y == 0)
+                        y = 1;
                     temp_mas[i] = static_cast<uint8_t>(255 - (x / y) % 255);
                     break;
                 case 8:
+                    if (x == 0)
+                        x = 1;
                     temp_mas[i] = static_cast<uint8_t>(255 - (y / x) % 255);
                     break;
             }

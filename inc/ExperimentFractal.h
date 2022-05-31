@@ -38,24 +38,28 @@ namespace fg {
             m_SpinBoxFirst->setGeometry(QRect(440, 90, 62, 22));
             m_SpinBoxFirst->setMinimum(-1.0);
             m_SpinBoxFirst->setMaximum(1.0);
+            m_SpinBoxFirst->setSingleStep(0.01);
             m_SpinBoxFirst->setValue(0);
 
             m_SpinBoxFirst_2 = new QDoubleSpinBox(this);
             m_SpinBoxFirst_2->setGeometry(QRect(570, 90, 62, 22));
             m_SpinBoxFirst_2->setMinimum(-1.0);
             m_SpinBoxFirst_2->setMaximum(1.0);
+            m_SpinBoxFirst_2->setSingleStep(0.01);
             m_SpinBoxFirst_2->setValue(0);
 
             m_SpinBoxFirst_3 = new QDoubleSpinBox(this);
             m_SpinBoxFirst_3->setGeometry(QRect(440, 130, 62, 22));
             m_SpinBoxFirst_3->setMinimum(-1.0);
             m_SpinBoxFirst_3->setMaximum(1.0);
+            m_SpinBoxFirst_3->setSingleStep(0.01);
             m_SpinBoxFirst_3->setValue(0);
 
             m_SpinBoxFirst_4 = new QDoubleSpinBox(this);
             m_SpinBoxFirst_4->setGeometry(QRect(570, 130, 62, 22));
             m_SpinBoxFirst_4->setMinimum(-1.0);
             m_SpinBoxFirst_4->setMaximum(1.0);
+            m_SpinBoxFirst_4->setSingleStep(0.01);
             m_SpinBoxFirst_4->setValue(0.16);
 
 
@@ -63,72 +67,84 @@ namespace fg {
             m_SpinBoxSecond_5->setGeometry(QRect(440, 200, 62, 22));
             m_SpinBoxSecond_5->setMinimum(-1.0);
             m_SpinBoxSecond_5->setMaximum(1.0);
+            m_SpinBoxSecond_5->setSingleStep(0.01);
             m_SpinBoxSecond_5->setValue(0.85);
 
             m_SpinBoxSecond_6 = new QDoubleSpinBox(this);
             m_SpinBoxSecond_6->setGeometry(QRect(570, 200, 62, 22));
             m_SpinBoxSecond_6->setMinimum(-1.0);
             m_SpinBoxSecond_6->setMaximum(1.0);
+            m_SpinBoxSecond_6->setSingleStep(0.01);
             m_SpinBoxSecond_6->setValue(0.04);
 
             m_SpinBoxSecond_7 = new QDoubleSpinBox(this);
             m_SpinBoxSecond_7->setGeometry(QRect(440, 240, 62, 22));
             m_SpinBoxSecond_7->setMinimum(-1.0);
             m_SpinBoxSecond_7->setMaximum(1.0);
+            m_SpinBoxSecond_7->setSingleStep(0.01);
             m_SpinBoxSecond_7->setValue(-0.04);
 
             m_SpinBoxSecond_8 = new QDoubleSpinBox(this);
             m_SpinBoxSecond_8->setGeometry(QRect(570, 240, 62, 22));
             m_SpinBoxSecond_8->setMinimum(-1.0);
             m_SpinBoxSecond_8->setMaximum(1.0);
+            m_SpinBoxSecond_8->setSingleStep(0.01);
             m_SpinBoxSecond_8->setValue(0.85);
 
             m_SpinBoxThird_9 = new QDoubleSpinBox(this);
             m_SpinBoxThird_9->setGeometry(QRect(440, 310, 62, 22));
             m_SpinBoxThird_9->setMinimum(-1.0);
             m_SpinBoxThird_9->setMaximum(1.0);
+            m_SpinBoxThird_9->setSingleStep(0.01);
             m_SpinBoxThird_9->setValue(0.2);
 
             m_SpinBoxThird_10 = new QDoubleSpinBox(this);
             m_SpinBoxThird_10->setGeometry(QRect(570, 310, 62, 22));
             m_SpinBoxThird_10->setMinimum(-1.0);
             m_SpinBoxThird_10->setMaximum(1.0);
+            m_SpinBoxThird_10->setSingleStep(0.01);
             m_SpinBoxThird_10->setValue(-0.26);
 
             m_SpinBoxThird_11 = new QDoubleSpinBox(this);
             m_SpinBoxThird_11->setGeometry(QRect(440, 350, 62, 22));
             m_SpinBoxThird_11->setMinimum(-1.0);
             m_SpinBoxThird_11->setMaximum(1.0);
+            m_SpinBoxThird_11->setSingleStep(0.01);
             m_SpinBoxThird_11->setValue(0.23);
 
             m_SpinBoxThird_12 = new QDoubleSpinBox(this);
             m_SpinBoxThird_12->setGeometry(QRect(570, 350, 62, 22));
             m_SpinBoxThird_12->setMinimum(-1.0);
             m_SpinBoxThird_12->setMaximum(1.0);
+            m_SpinBoxThird_12->setSingleStep(0.01);
             m_SpinBoxThird_12->setValue(0.22);
 
             m_SpinBoxFourth_13 = new QDoubleSpinBox(this);
             m_SpinBoxFourth_13->setGeometry(QRect(440, 420, 62, 22));
             m_SpinBoxFourth_13->setMinimum(-1.0);
             m_SpinBoxFourth_13->setMaximum(1.0);
+            m_SpinBoxFourth_13->setSingleStep(0.01);
             m_SpinBoxFourth_13->setValue(-0.15);
 
             m_SpinBoxFourth_14 = new QDoubleSpinBox(this);
             m_SpinBoxFourth_14->setGeometry(QRect(570, 420, 62, 22));
             m_SpinBoxFourth_14->setMinimum(-1.0);
             m_SpinBoxFourth_14->setMaximum(1.0);
+            m_SpinBoxFourth_14->setSingleStep(0.01);
             m_SpinBoxFourth_14->setValue(0.28);
 
             m_SpinBoxFourth_15 = new QDoubleSpinBox(this);
             m_SpinBoxFourth_15->setGeometry(QRect(440, 460, 62, 22));
             m_SpinBoxFourth_15->setMinimum(-1.0);
             m_SpinBoxFourth_15->setMaximum(1.0);
+            m_SpinBoxFourth_15->setSingleStep(0.01);
             m_SpinBoxFourth_15->setValue(0.26);
 
             m_SpinBoxFourth_16 = new QDoubleSpinBox(this);
             m_SpinBoxFourth_16->setGeometry(QRect(570, 460, 62, 22));
             m_SpinBoxFourth_16->setMinimum(-1.0);
             m_SpinBoxFourth_16->setMaximum(1.0);
+            m_SpinBoxFourth_16->setSingleStep(0.01);
             m_SpinBoxFourth_16->setValue(0.24);
 
             label_5 = new QLabel(this);
@@ -138,26 +154,30 @@ namespace fg {
 
             m_SpinBoxAddFirst_1 = new QDoubleSpinBox(this);
             m_SpinBoxAddFirst_1->setGeometry(QRect(440, 520, 62, 22));
-            m_SpinBoxAddFirst_1->setMinimum(-1.0);
-            m_SpinBoxAddFirst_1->setMaximum(1.0);
+            m_SpinBoxAddFirst_1->setMinimum(-2.0);
+            m_SpinBoxAddFirst_1->setMaximum(2.0);
+            m_SpinBoxAddFirst_1->setSingleStep(0.01);
             m_SpinBoxAddFirst_1->setValue(0);
 
             m_SpinBoxAddFirst_2 = new QDoubleSpinBox(this);
             m_SpinBoxAddFirst_2->setGeometry(QRect(570, 520, 62, 22));
             m_SpinBoxAddFirst_2->setMinimum(-2.0);
             m_SpinBoxAddFirst_2->setMaximum(2.0);
+            m_SpinBoxAddFirst_2->setSingleStep(0.01);
             m_SpinBoxAddFirst_2->setValue(1.6);
 
             m_SpinBoxAddSecond_1 = new QDoubleSpinBox(this);
             m_SpinBoxAddSecond_1->setGeometry(QRect(440, 560, 62, 22));
             m_SpinBoxAddSecond_1->setMinimum(-2.0);
             m_SpinBoxAddSecond_1->setMaximum(2.0);
+            m_SpinBoxAddSecond_1->setSingleStep(0.01);
             m_SpinBoxAddSecond_1->setValue(0);
 
             m_SpinBoxAddSecond_2 = new QDoubleSpinBox(this);
             m_SpinBoxAddSecond_2->setGeometry(QRect(570, 560, 62, 22));
             m_SpinBoxAddSecond_2->setMinimum(-2.0);
             m_SpinBoxAddSecond_2->setMaximum(2.0);
+            m_SpinBoxAddSecond_2->setSingleStep(0.01);
             m_SpinBoxAddSecond_2->setValue(0.44);
 
             line = new QFrame(this);
@@ -228,12 +248,11 @@ namespace fg {
             math::Vec2d fp1({{{m_SpinBoxAddFirst_1->value()}, {m_SpinBoxAddFirst_2->value()}}});
             math::Vec2d fp2({{{m_SpinBoxAddSecond_1->value()}, {m_SpinBoxAddSecond_2->value()}}});
             math::Vec2d fp3({{{0}, {0}}});
-            math::Vec2d fp4({{{0}, {0}}});
 
             images::Fractal fr;
 
             fr.setMainLaws(f1, f2, f3, f4);
-            fr.setAdditionalLaws(fp1, fp2, fp3, fp4);
+            fr.setAdditionalLaws(fp3, fp1, fp1, fp2);
 
             fr.setImageSize(size);
             fr.setFractalHeight(d_x, d_y);

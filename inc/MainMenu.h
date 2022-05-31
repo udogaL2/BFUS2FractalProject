@@ -63,13 +63,13 @@ namespace fg {
 
     private:
         void setText() {
-            this->setWindowTitle(QString::fromUtf8("Fractal Generator 2"));
+            this->setWindowTitle(QString::fromUtf8("Fractal Generator"));
             m_btnSheetFractal->setText(QString::fromUtf8("Лист папоротника"));
             m_btnFirFractal->setText(QString::fromUtf8("Елка"));
             m_btnMyFractal->setText(QString::fromUtf8("Шоу \"эксперименты\""));
             m_btnClose->setText(QString::fromUtf8("Закрыть программу"));
             m_Title->setText(QString::fromUtf8("Fractal Generator"));
-            m_btnMapleFractal->setText(QString::fromUtf8("Клиновый лист"));
+            m_btnMapleFractal->setText(QString::fromUtf8("Кленовый лист"));
             m_btnSpiralFractal->setText(QString::fromUtf8("Спираль"));
         }
 
@@ -91,7 +91,7 @@ namespace fg {
         }
 
         void slotBtnOpenMapleFractal(){
-            m_mapleFractal = std::make_unique<MapleFractal>("Клиновый лист");
+            m_mapleFractal = std::make_unique<MapleFractal>("Кленовый лист");
             m_mapleFractal->show();
         }
 

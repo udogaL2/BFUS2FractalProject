@@ -88,13 +88,15 @@ namespace fg {
             m_hSlider_dx->setMinimum(1);
             m_hSlider_dx->setMaximum(20);
             m_hSlider_dx->setValue(12);
+            m_hSlider_dx->setPageStep(1);
             m_hSlider_dx->setOrientation(Qt::Horizontal);
 
             m_hSlider_dy = new QSlider(this);
             m_hSlider_dy->setGeometry(QRect(20, 170, 251, 22));
             m_hSlider_dy->setMinimum(1);
-            m_hSlider_dy->setMaximum(10);
+            m_hSlider_dy->setMaximum(20);
             m_hSlider_dy->setValue(10);
+            m_hSlider_dy->setPageStep(1);
             m_hSlider_dy->setOrientation(Qt::Horizontal);
             // *QSlider
 
@@ -225,7 +227,7 @@ namespace fg {
             m_spinBox_dy->setReadOnly(true);
             m_spinBox_dy->setButtonSymbols(QAbstractSpinBox::NoButtons);
             m_spinBox_dy->setMinimum(1);
-            m_spinBox_dy->setMaximum(10);
+            m_spinBox_dy->setMaximum(20);
             m_spinBox_dy->setValue(10);
             // *QSpinBox
 
